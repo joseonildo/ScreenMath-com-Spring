@@ -1,4 +1,4 @@
-package br.com.joseonildo.screenmatch.testes;
+package br.com.joseonildo.screenmatch;
 
 import br.com.joseonildo.screenmatch.model.DadosEpisodio;
 import br.com.joseonildo.screenmatch.model.DadosSerie;

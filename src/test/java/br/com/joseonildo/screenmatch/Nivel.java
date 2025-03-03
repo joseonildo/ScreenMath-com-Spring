@@ -1,4 +1,4 @@
-package br.com.joseonildo.screenmatch.testes;
+package br.com.joseonildo.screenmatch;
 
 public enum Nivel {
     INICIANTE(1),

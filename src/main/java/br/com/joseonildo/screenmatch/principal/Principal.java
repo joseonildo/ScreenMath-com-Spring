@@ -6,7 +6,6 @@ import br.com.joseonildo.screenmatch.model.Serie;
 import br.com.joseonildo.screenmatch.repository.SerieRepository;
 import br.com.joseonildo.screenmatch.service.ConsumoAPI;
 import br.com.joseonildo.screenmatch.service.ConverteDados;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.io.IOException;
