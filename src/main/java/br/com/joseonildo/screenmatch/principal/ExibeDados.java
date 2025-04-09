@@ -1,10 +1,8 @@
 package br.com.joseonildo.screenmatch.principal;
 
 import br.com.joseonildo.screenmatch.model.DadosEpisodio;
-import br.com.joseonildo.screenmatch.model.DadosSerie;
 import br.com.joseonildo.screenmatch.model.DadosTemporada;
 import br.com.joseonildo.screenmatch.model.Serie;
-
 import java.util.List;
 
 public class ExibeDados {
@@ -16,9 +14,15 @@ public class ExibeDados {
                 
                 ############# MENU #############
                 
-                1 - Buscar Series
-                2 - Buscar Episodios
-                3 - Listar Series buscadas
+                1 - Buscar Serie + Episodios
+                2 - Listar Series (Resumo)
+                3 - Listar Series (Detalhado)
+                4 - Listar Series + Episodios
+                5 - Escolher Série e listar episodios
+                6 - Buscar Series por Ator
+                7 - TOP 5 Series
+                8 - Buscar Séries por Categoria
+                9 - Modificar Serie (Incluir Atores)
                 
                 0 - Sair
                 
@@ -26,7 +30,7 @@ public class ExibeDados {
                 """;
     }
 
-    public static void exibeSerie(Serie dadosSerie) {
+    public static void exibeSerie(Serie dadosSerie, Boolean ExibirEpisodio) {
         System.out.printf("""                        
                         
                         Genero:            %s
@@ -38,11 +42,13 @@ public class ExibeDados {
                         Atores:            %s
                         Poster:            %s
                         Sinopse:           %s
+                        Episodios:         %s
                         """,
                 dadosSerie.getGenero(), dadosSerie.getTitulo(), dadosSerie.getAnoLancamento(),
                 dadosSerie.getPeriodoAtiva(), dadosSerie.getTotalTemporadas(),
                 dadosSerie.getAvaliacao(), dadosSerie.getAtores(),
-                dadosSerie.getPoster(), dadosSerie.getSinopse());
+                dadosSerie.getPoster(), dadosSerie.getSinopse(),
+                (ExibirEpisodio? dadosSerie.getEpisodios():"Completo"));
     }
 
     public static void exibeTeporada(List<DadosTemporada> temporadas) {

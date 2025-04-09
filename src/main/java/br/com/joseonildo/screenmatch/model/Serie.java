@@ -10,7 +10,7 @@ import java.util.OptionalDouble;
 @Table(name = "Series")
 public class Serie {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(unique = true)
     private String titulo;
@@ -23,7 +23,7 @@ public class Serie {
     private String atores;
     private String poster;
     private String sinopse;
-    @Transient
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Episodio> episodios = new ArrayList<>();
 
     public  Serie() {}
@@ -72,6 +72,10 @@ public class Serie {
         return atores;
     }
 
+    public void setAtores(String atores) {
+        this.atores += ", " + atores;
+    }
+
     public String getPoster() {
         return poster;
     }
@@ -84,6 +88,11 @@ public class Serie {
         return episodios;
     }
 
+    public void setEpisodios(List<Episodio> episodios) {
+        episodios.forEach(e -> e.setSerie(this));
+        this.episodios = episodios;
+    }
+
     @Override
     public String toString() {
         return  "genero=" + genero +
@@ -92,9 +101,9 @@ public class Serie {
                 ", periodoAtiva='" + periodoAtiva + '\'' +
                 ", totalTemporadas=" + totalTemporadas +
                 ", avaliacao=" + avaliacao +
-
                 ", atores='" + atores + '\'' +
                 ", poster='" + poster + '\'' +
-                ", sinopse='" + sinopse + '\'';
+                ", sinopse='" + sinopse + '\'' +
+                ", episodios='" + episodios + '\'';
     }
 }
