@@ -1,9 +1,9 @@
 package br.com.joseonildo.screenmatch.principal;
 
-import br.com.joseonildo.screenmatch.model.DadosEpisodio;
-import br.com.joseonildo.screenmatch.model.DadosTemporada;
+//import br.com.joseonildo.screenmatch.model.DadosEpisodio;
+//import br.com.joseonildo.screenmatch.model.DadosTemporada;
 import br.com.joseonildo.screenmatch.model.Serie;
-import java.util.List;
+//import java.util.List;
 
 public class ExibeDados {
     public static double avaliacaoTemporada = 0.0;
@@ -14,23 +14,27 @@ public class ExibeDados {
                 
                 ############# MENU #############
                 
-                1 - Buscar Serie + Episodios
-                2 - Listar Series (Resumo)
-                3 - Listar Series (Detalhado)
-                4 - Listar Series + Episodios
-                5 - Escolher Série e listar episodios
-                6 - Buscar Series por Ator
-                7 - TOP 5 Series
-                8 - Buscar Séries por Categoria
-                9 - Modificar Serie (Incluir Atores)
+                1 -> Cadastrar Serie + Episodios
+                2 -> Listar Series (Resumida)
+                3 -> Listar Series (Detalhada)
+                4 -> Escolher Série e listar episodios
+                5 -> Listar Series por Ator e Avaliação
+                6 -> Listar TOP 5 Series
+                7 -> Listar Séries por Categoria
+                8 -> Listar Series por Temporadas e Avaliação
+                9 -> Listar Episodios por trecho
+                10-> Listar TOP 5 Episodios por Série
+                11-> Listar episódios a partir de um ano
+                12-> Listar Series a partir de um ano
                 
-                0 - Sair
+                20-> Acrescentar Ator na Serie
+                0 -> Sair
                 
                 ################################
                 """;
     }
 
-    public static void exibeSerie(Serie dadosSerie, Boolean ExibirEpisodio) {
+    public static void exibeSerie(Serie dadosSerie, Boolean exibeEpisodios) {
         System.out.printf("""                        
                         
                         Genero:            %s
@@ -44,14 +48,14 @@ public class ExibeDados {
                         Sinopse:           %s
                         Episodios:         %s
                         """,
-                dadosSerie.getGenero(), dadosSerie.getTitulo(), dadosSerie.getAnoLancamento(),
+                dadosSerie.getGenero(), dadosSerie.getTitulo(), dadosSerie.getDataLancamento(),
                 dadosSerie.getPeriodoAtiva(), dadosSerie.getTotalTemporadas(),
                 dadosSerie.getAvaliacao(), dadosSerie.getAtores(),
                 dadosSerie.getPoster(), dadosSerie.getSinopse(),
-                (ExibirEpisodio? dadosSerie.getEpisodios():"Completo"));
+                (exibeEpisodios? dadosSerie.getEpisodios():dadosSerie.getEpisodios().size()));
     }
 
-    public static void exibeTeporada(List<DadosTemporada> temporadas) {
+    /*public static void exibeTeporada(List<DadosTemporada> temporadas) {
         for (DadosTemporada temporada : temporadas) {
             avaliacaoTemporada = 0.0;
             qtdEpisodios = 0;
@@ -81,5 +85,5 @@ public class ExibeDados {
                 System.out.println("   - Informações da temporada não encontradas.");
             }
         }
-    }
+    }*/
 }

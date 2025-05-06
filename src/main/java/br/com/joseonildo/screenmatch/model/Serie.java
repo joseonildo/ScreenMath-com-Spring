@@ -2,8 +2,13 @@ package br.com.joseonildo.screenmatch.model;
 
 import br.com.joseonildo.screenmatch.service.ConsultaMyMemory;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.OptionalDouble;
 
 @Entity
@@ -14,12 +19,12 @@ public class Serie {
     private Long id;
     @Column(unique = true)
     private String titulo;
-    private String anoLancamento;
     private String periodoAtiva;
     private Integer totalTemporadas;
     private Double avaliacao;
     @Enumerated(EnumType.STRING)
     private Categoria genero;
+    private LocalDate dataLancamento;
     private String atores;
     private String poster;
     private String sinopse;
@@ -30,11 +35,16 @@ public class Serie {
 
     public Serie(DadosSerie dadosSerie) {
         this.titulo = dadosSerie.titulo();
-        this.anoLancamento = dadosSerie.anoLancamento();
         this.periodoAtiva = dadosSerie.periodoAtiva();
         this.totalTemporadas = Integer.valueOf(dadosSerie.totalTemporadas());
         this.avaliacao = OptionalDouble.of(Double.parseDouble(dadosSerie.avaliacao())).orElse(0);
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu", Locale.ENGLISH);
+            this.dataLancamento = LocalDate.parse(dadosSerie.dataLancamento(),formatter);
+        } catch (DateTimeParseException ex) {
+            this.dataLancamento = null;
+        }
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
         this.sinopse = ConsultaMyMemory.obterTraducao(dadosSerie.sinopse()).trim();
@@ -48,8 +58,8 @@ public class Serie {
         return titulo;
     }
 
-    public String getAnoLancamento() {
-        return anoLancamento;
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
     }
 
     public String getPeriodoAtiva() {
@@ -97,7 +107,7 @@ public class Serie {
     public String toString() {
         return  "genero=" + genero +
                 ", titulo='" + titulo + '\'' +
-                ", anoLancamento='" + anoLancamento + '\'' +
+                ", anoLancamento='" + dataLancamento + '\'' +
                 ", periodoAtiva='" + periodoAtiva + '\'' +
                 ", totalTemporadas=" + totalTemporadas +
                 ", avaliacao=" + avaliacao +
